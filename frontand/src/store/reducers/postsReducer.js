@@ -1,6 +1,6 @@
 import {
     ADD_DATA_FAILURE,
-    ADD_DATA_REQUEST,
+    ADD_DATA_REQUEST, ADD_DATA_SUCCESS,
     FETCH_DATA_FAILURE,
     FETCH_DATA_REQUEST,
     FETCH_POST_SUCCESS,
@@ -33,7 +33,8 @@ const postsReducer = (state = initialState, action) => {
 
         case ADD_DATA_FAILURE:
             return {...state, loading: false, error: action.error};
-
+        case ADD_DATA_SUCCESS:
+            return {...state, loading: false, error: null}
         default:
             return state;
     }

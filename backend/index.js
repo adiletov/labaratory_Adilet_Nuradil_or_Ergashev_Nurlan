@@ -10,9 +10,10 @@ const comments = require('./app/comments');
 const app = express();
 const port = 8080;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-app.use(cors());
+
 
 mongoose.connect(config.dbUrl, config.mongoOptions).then(() => {
     app.use('/posts', posts);

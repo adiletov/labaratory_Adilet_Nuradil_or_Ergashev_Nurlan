@@ -15,6 +15,7 @@ const addDataRequest = () => ({type: ADD_DATA_REQUEST});
 const addDataFailure = error => ({type: ADD_DATA_FAILURE, error});
 const addDataSuccess = () => ({type: ADD_DATA_SUCCESS});
 
+
 const fetchCommentsSuccess = comments => ({type: FETCH_COMMENTS_SUCCESS, comments});
 
 export const fetchComments = postId => {
@@ -33,7 +34,6 @@ export const addComment = commentData => {
     return async (dispatch, getState) => {
         const token = getState().users.user.token;
         const config = {headers: {'Authorization': token}};
-
         dispatch(addDataRequest());
 
         try {
@@ -45,3 +45,5 @@ export const addComment = commentData => {
 
     }
 };
+
+

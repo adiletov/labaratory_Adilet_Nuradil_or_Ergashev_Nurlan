@@ -10,8 +10,7 @@ router.get('/', async (req, res) => {
         try {
             const comments = await Comment
                 .find({post: req.query.post})
-                .populate({path: 'user', select: 'fullName'});
-
+                .populate({path: 'user', select: 'username'});
             return res.send(comments);
         } catch {
             return res.sendStatus(400);
@@ -21,13 +20,15 @@ router.get('/', async (req, res) => {
     }
 });
 
+
 router.post('/', auth, async (req, res) => {
     const commentData = req.body;
-    commentData.user = req.user._id;
+    const user = req.user;
+    commentData.user = user._id;
+
+    const comment = new Comment(commentData);
 
     try {
-        const comment = new Comment(commentData);
-
         await comment.save();
         return res.send({message: 'Comment added', comment});
     } catch (e) {

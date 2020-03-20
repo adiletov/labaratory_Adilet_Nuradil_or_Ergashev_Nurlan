@@ -3,13 +3,14 @@ import {apiURL} from "../../constants";
 import {NavLink} from "react-router-dom";
 import textIcon from "../../assets/images/text-icon.png";
 
+
 const PostListItem = props => {
     return (
         <div className="post box">
             <NavLink to={`posts/${props.id}`} className="post-img">
                 {props.image
                     ? <img src={`${apiURL}/uploads/${props.image}`} alt={props.title}/>
-                    : <img src={textIcon} alt=""/>
+                    : <img src={textIcon} alt="no images"/>
                 }
             </NavLink>
             <div className="post-text">
@@ -20,5 +21,7 @@ const PostListItem = props => {
         </div>
     );
 };
+
+
 
 export default PostListItem;

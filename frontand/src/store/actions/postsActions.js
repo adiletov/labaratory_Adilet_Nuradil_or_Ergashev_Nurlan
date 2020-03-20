@@ -23,7 +23,6 @@ const fetchPostSuccess = post => ({type: FETCH_POST_SUCCESS, post});
 export const fetchPosts = () => {
     return async dispatch => {
         dispatch(fetchDataRequest());
-
         try {
             const response = await axios.get('/posts');
             dispatch(fetchPostsSuccess(response.data));

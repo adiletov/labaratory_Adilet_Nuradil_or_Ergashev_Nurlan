@@ -47,19 +47,18 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', [auth, upload.single('image')], async (req, res) => {
-    if (req.body.description || req.body.image) {
+    if (req.body.description || req.file) {
 
         const postData = req.body;
         postData.user = req.user._id;
-        postData.datetime = new Date().toISOString();
+        postData.datetime = new Date();
 
         if (req.file) {
             postData.image = req.file.filename;
         }
+        const post = new Post(postData);
 
         try {
-            const post = new Post(postData);
-
             await post.save();
             return res.send({message: 'Post added', post});
         } catch (e) {

@@ -9,7 +9,7 @@ import {
 const initialState = {
     comments: [],
     error: null,
-    loading: true
+    loading: true,
 };
 
 const commentsReducer = (state = initialState, action) => {
@@ -28,7 +28,6 @@ const commentsReducer = (state = initialState, action) => {
 
         case ADD_DATA_FAILURE:
             return {...state, loading: false, error: action.error};
-
         default:
             return state
     }

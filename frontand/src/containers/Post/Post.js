@@ -15,7 +15,7 @@ class Post extends Component {
 
     render() {
         const post = this.props.post;
-        const published_at = new Date(post.published_at).toLocaleString('ru-Ru');
+        const datetime = new Date(post.datetime).toLocaleString('ru-Ru');
         const user = post.user && post.user.username;
 
         return (
@@ -25,7 +25,7 @@ class Post extends Component {
                     image={post.image}
                     description={post.description}
                     user={user}
-                    published_at={published_at}
+                    datetime={datetime}
                 />
 
                 <div className="comments mb-4">
@@ -33,7 +33,7 @@ class Post extends Component {
                     {this.props.comments.map(comment => (
                         <Comment
                             key={comment._id}
-                            user={comment.user.fullName}
+                            user={comment.user.username}
                             text={comment.text}
                         />
                     ))}
@@ -58,7 +58,6 @@ const mapSateToProps = state => ({
     post: state.posts.post,
     postError: state.posts.error,
     loadingPost: state.posts.loading,
-
     comments: state.comments.comments,
     commentError: state.comments.error,
     loadingComments: state.comments.loading,

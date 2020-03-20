@@ -9,6 +9,7 @@ class Posts extends Component {
         this.props.fetchPosts();
     }
 
+
     render() {
         return (
             <div>
@@ -17,15 +18,14 @@ class Posts extends Component {
                 {this.props.loading && <Loader/>}
 
                 {this.props.posts.map(post => {
-                    const published_at = new Date(post.datetime).toLocaleString('ru-Ru');
-
+                    const datetime = new Date(post.datetime).toLocaleString('ru-Ru');
                     return (
                         <PostListItem
                             key={post._id}
                             id={post._id}
                             image={post.image}
                             title={post.title}
-                            published_at={published_at}
+                            datetime={datetime}
                             user={post.user}
                         />
                     )
@@ -38,11 +38,12 @@ class Posts extends Component {
 const mapStateToProps = state => ({
     posts: state.posts.posts,
     error: state.posts.state,
-    loading: state.posts.loading
+    loading: state.posts.loading,
+    commentLength: state.comments.commentLength
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchPosts: () => dispatch(fetchPosts()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
